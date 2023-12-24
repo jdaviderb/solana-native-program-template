@@ -11,11 +11,6 @@ no-entrypoint = []
 [dependencies]
 solana-program = "~1.17.12"
 
-[dev-dependencies]
-solana-program-test = "~1.17.12"
-solana-sdk = "~1.17.12"
-
-
 [lib]
 name = "solana_program"
 crate-type = ["cdylib", "lib"]

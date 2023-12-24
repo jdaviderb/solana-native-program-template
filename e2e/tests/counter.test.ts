@@ -1,5 +1,6 @@
 import {describe, expect, test} from '@jest/globals';
 import { Connection, Transaction, TransactionInstruction, PublicKey, Keypair, sendAndConfirmTransaction, SystemProgram } from '@solana/web3.js';
+import { wait } from '../utils';
 
 describe('Counter Program', () => {
   const programId = new PublicKey(process.env['SOLANA_PROGRAM_ID'] as string);
@@ -72,8 +73,3 @@ describe('Counter Program', () => {
     expect(counterData?.data[0]).toBe(2);
   });
 });
-
-
-function wait(ms: number) {
-  return new Promise<void>((resolve) => setTimeout(() => resolve(), ms));
-}
