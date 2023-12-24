@@ -9,6 +9,7 @@ interface Global {
 module.exports = async function() {
   const gb = global as Global;
 
+  // Kill Solana Validator
   if (gb.SOLANA_VALIDATOR_PROCESS && gb.SOLANA_VALIDATOR_PROCESS.kill()) {
     process.exit(1);
   }

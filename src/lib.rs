@@ -1,40 +1,37 @@
-mod utils;
-mod accounts;
-
-use crate::utils::cast_to;
-use crate::utils::cast_mut_to;
-use crate::accounts::Vault;
-
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint,
     entrypoint::ProgramResult,
     msg,
-    program_error::ProgramError,
     pubkey::Pubkey,
 };
 
 entrypoint!(process_instruction);
 
-
-
-pub enum ProgramInstructions {
-    Init,
-}
-
 pub fn process_instruction(
     _program_id: &Pubkey,
-    _accounts: &[AccountInfo],
+    accounts: &[AccountInfo],
     instruction_data: &[u8],
 ) -> ProgramResult {
-    let instructions: &ProgramInstructions = cast_to(&instruction_data);
+    let mut accounts_iter = accounts.iter();
+    let _signer = next_account_info(&mut accounts_iter)?;
+    let counter = next_account_info(&mut accounts_iter)?;
 
-    match instructions {
-        ProgramInstructions::Init => {
-            msg!("Jorge Hernandez");
-        },
+    match instruction_data[0] {
+        0 => {
+            msg!("Initialize Account");
+            counter.data.borrow_mut()[0] = 1;
+        }
+
+        1 => {
+            msg!("Increase Account");
+            counter.data.borrow_mut()[0] += 1;
+        } 
+
+        _ => {
+            return Err(solana_program::program_error::ProgramError::InvalidInstructionData);
+        }
     }
 
-    
     Ok(())
 }
