@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-bpf": "cargo build-bpf --manifest-path ../Cargo.toml",
-    "test": "npm run build-bpf && COPYFILE_DISABLE=1 jest"
+    "test": "npm run build-bpf && COPYFILE_DISABLE=1 jest --forceExit"
   },
   "author": "",
   "license": "ISC",
