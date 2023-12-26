@@ -6,8 +6,7 @@ describe('Counter Program', () => {
   const programId = new PublicKey(process.env['SOLANA_PROGRAM_ID'] as string);
   const wallet = Keypair.generate();
   const port = process.env['RPC_PORT'];
-  const connection = new Connection(`http://localhost:${port}`, 'confirmed');
-
+  const connection = new Connection(`http://127.0.0.1:${port}`, 'confirmed');
 
   test('Initialize Counter', async () => {
     await connection.requestAirdrop(wallet.publicKey, 5000000000);

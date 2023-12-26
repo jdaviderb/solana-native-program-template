@@ -1,0 +1,34 @@
+name: Solana Program Tests
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Rust
+      uses: hecrj/setup-rust-action@v2
+      with:
+        rust-version: stable
+    
+    - name: Setup Solana Tool suite
+      run: |
+        sh -c "$(curl -sSfL https://release.solana.com/v1.17.13/install)"
+
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.x'
+
+    - name: Run Tests
+      run: |
+        export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+        solana-keygen new --no-passphrase --force -o program.json
+        cd e2e
+        npm install
+        npm run test
