@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-bpf": "cargo build-bpf --manifest-path ../Cargo.toml",
+    "build-bpf": "cargo build-sbf --manifest-path ../Cargo.toml",
     "test": "npm run build-bpf && COPYFILE_DISABLE=1 jest --forceExit"
   },
   "author": "",
@@ -12,11 +12,11 @@
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@solana/web3.js": "^1.87.6",
-    "jest": "^29.7.0",
+    "jest": "^29.7.0",  
     "ts-jest": "^29.1.1"
   },
   "solana": {
     "wallet": "../program.json",
-    "output": "../target/sbf-solana-solana/release/solana_program.so"
+    "output": "../target/deploy/solana_program.so"
   }
 }

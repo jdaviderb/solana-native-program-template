@@ -9,7 +9,9 @@ edition = "2021"
 no-entrypoint = []
 
 [dependencies]
-solana-program = "~1.17.12"
+solana-program = "1.18.26"
+ahash="=0.8.7"
+
 
 [lib]
 name = "solana_program"
