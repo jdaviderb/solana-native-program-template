@@ -7,23 +7,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Setup Rust
-      uses: hecrj/setup-rust-action@v2
+      uses: dtolnay/rust-toolchain@stable
       with:
-        rust-version: stable
+        toolchain: stable
     
     - name: Setup Solana Tool suite
       run: |
-        sh -c "$(curl -sSfL https://release.solana.com/v1.17.13/install)"
+        curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
 
     - name: Setup NodeJS
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: '18.x'
+        node-version: '22.14.0'
 
     - name: Run Tests
       run: |
