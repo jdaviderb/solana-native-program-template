@@ -1,6 +1,6 @@
-import { spawn } from 'child_process';
+import { spawn, ChildProcess } from 'child_process';
 import fs from 'fs';
-import PackageConfig from './package.json';
+import * as PackageConfig from './package.json';
 
 import { Keypair } from '@solana/web3.js';
 
@@ -50,6 +50,10 @@ async function waitForRpc(): Promise<boolean> {
   }
 }
 
+interface RpcResponse {
+  result?: string;
+}
+
 async function validateRpc(): Promise<boolean> {
   const data = await fetch(`http://127.0.0.1:${RPC_PORT}`, {
     method: 'post',
@@ -61,7 +65,7 @@ async function validateRpc(): Promise<boolean> {
     headers: { 'Content-Type': 'application/json' },
   })
   .then((res) => res.json())
-  .catch(() => null)
+  .catch(() => null) as RpcResponse | null;
 
   return data?.result === 'ok';
 }
